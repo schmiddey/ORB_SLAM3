@@ -186,6 +186,8 @@ public:
 
     float GetImageScale();
 
+    cv::Mat getFrameDrawed(float scale = 1.0f);
+
 #ifdef REGISTER_TIMES
     void InsertRectTime(double& time);
     void InsertResizeTime(double& time);
