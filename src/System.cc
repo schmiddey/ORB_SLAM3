@@ -297,7 +297,7 @@ Sophus::SE3f System::TrackStereo(const cv::Mat &imLeft, const cv::Mat &imRight, 
         unique_lock<mutex> lock(mMutexReset);
         if(mbReset)
         {
-            mpTracker->Reset();
+            mpTracker->Reset(mResetPose);
             mbReset = false;
             mbResetActiveMap = false;
         }
@@ -500,10 +500,11 @@ bool System::MapChanged()
         return false;
 }
 
-void System::Reset()
+void System::Reset(const Sophus::SE3f &pose)
 {
     unique_lock<mutex> lock(mMutexReset);
     mbReset = true;
+    mResetPose = pose;
 }
 
 void System::ResetActiveMap()

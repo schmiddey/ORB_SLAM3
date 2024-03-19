@@ -131,7 +131,7 @@ public:
     bool MapChanged();
 
     // Reset the system (clear Atlas or the active map)
-    void Reset();
+    void Reset(const Sophus::SE3f& pose = Sophus::SE3f());
     void ResetActiveMap();
 
     // All threads will be requested to finish.
@@ -264,6 +264,8 @@ private:
     string mStrVocabularyFilePath;
 
     Settings* settings_;
+
+    Sophus::SE3f mResetPose;
 };
 
 }// namespace ORB_SLAM

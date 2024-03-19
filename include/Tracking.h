@@ -162,6 +162,7 @@ public:
     bool mbOnlyTracking;
 
     void Reset(bool bLocMap = false);
+    void Reset(const Sophus::SE3f &pose, bool bLocMap = false);
     void ResetActiveMap(bool bLocMap = false);
 
     float mMeanTrack;
@@ -354,6 +355,8 @@ protected:
     int initID, lastID;
 
     Sophus::SE3f mTlr;
+
+    Sophus::SE3f mInitPose;
 
     void newParameterLoader(Settings* settings);
 

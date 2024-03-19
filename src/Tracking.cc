@@ -2367,8 +2367,9 @@ void Tracking::StereoInitialization()
             mCurrentFrame.SetImuPoseVelocity(Rwb0, twb0, Vwb0);
         }
         else
-            mCurrentFrame.SetPose(Sophus::SE3f());
-
+        {
+            mCurrentFrame.SetPose(mInitPose);
+        }
         // Create KeyFrame
         KeyFrame* pKFini = new KeyFrame(mCurrentFrame,mpAtlas->GetCurrentMap(),mpKeyFrameDB);
 
@@ -3835,6 +3836,13 @@ void Tracking::Reset(bool bLocMap)
         mpViewer->Release();
 
     Verbose::PrintMess("   End reseting! ", Verbose::VERBOSITY_NORMAL);
+}
+
+
+void Tracking::Reset(const Sophus::SE3f &pose, bool bLocMap)
+{
+  mInitPose = pose; //copy
+  this->Reset(bLocMap);
 }
 
 void Tracking::ResetActiveMap(bool bLocMap)
